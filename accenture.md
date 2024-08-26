@@ -72,7 +72,90 @@ def oddeven(n,m):
 print(oddeven(4,20))
 ```
 
-Certainly! Here’s how you can tackle each of the specified tasks with Python code:
+Take an input n and take n inputs. Take another input k. Print the element's index if k is present. If k is not present, print the index in negative on where it should be present. Inputs are assumed as sorted and unique.
+
+Input Format
+
+Integer input n Integer inputs a[i]
+
+Constraints
+
+1<=n<=10000
+
+1<=a[i]<=10000
+
+Output Format
+
+Index of the element if present, print the index in negative where the element is supposed to be.
+
+Sample Input 0
+
+5
+1 2 3 4 5
+2
+Sample Output 0
+
+1
+Explanation 0
+
+2 is present in the 1st index
+
+Sample Input 1
+
+5
+1 3 5 7 9
+2
+Sample Output 1
+
+-1
+Explanation 1
+
+2 is not present in our set of elements, therefore, it is meant to be in index 1. Therefore -1.
+
+Sample Input 2
+
+1
+55
+55
+Sample Output 2
+
+0
+Sample Input 3
+
+1
+55
+53
+Sample Output 3
+
+0
+Sample Input 4
+
+1
+55
+57
+Sample Output 4
+
+-1
+
+```python
+n=int(input().strip())
+arr=list(map(int,input().strip().split()))
+k=int(input())
+
+def index(arr,k,n):
+    low,high=0,n-1
+    
+    while low<=high:
+        mid=(low+high)//2
+        if arr[mid]==k:
+            return mid
+        elif arr[mid]<k:
+            low=mid+1
+        else:
+            high=mid-1
+    return -low
+print(index(arr,k,n))
+```
 
 ### 1. Occurrence of Second Largest Element in an Array
 
