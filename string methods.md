@@ -415,7 +415,214 @@ Here is a list of 20 common string problems that are frequently asked in intervi
    - Example: `"a@b#c$d!" -> "abcd"`
    - Methods: `isalnum()`, `filter()`, `re.sub()`
 
-     
+
+
+### 1. **Longest Common Prefix Among a List of Strings**
+```python
+def longest_common_prefix(strs):
+    if not strs:
+        return ""
+    
+    # Find the minimum and maximum strings lexicographically
+    min_str = min(strs)
+    max_str = max(strs)
+
+    # Compare characters of min and max string
+    for i in range(len(min_str)):
+        if min_str[i] != max_str[i]:
+            return min_str[:i]
+    
+    return min_str
+
+# Example Usage
+strs = ["flower", "flow", "flight"]
+print(longest_common_prefix(strs))  # Output: "fl"
+```
+
+### 2. **Remove Duplicates from a String**
+```python
+def remove_duplicates(s):
+    return "".join(sorted(set(s), key=s.index))
+
+# Example Usage
+s = "programming"
+print(remove_duplicates(s))  # Output: "progamin"
+```
+
+### 3. **Check if a String is a Substring of Another**
+```python
+def is_substring(s1, s2):
+    return s2 in s1
+
+# Example Usage
+s1 = "hello"
+s2 = "ell"
+print(is_substring(s1, s2))  # Output: True
+```
+
+### 4. **Replace Spaces with %20 (URL Encoding)**
+```python
+def url_encode(s):
+    return s.replace(" ", "%20")
+
+# Example Usage
+s = "Mr John Smith"
+print(url_encode(s))  # Output: "Mr%20John%20Smith"
+```
+
+### 5. **Find the Most Frequent Character in a String**
+```python
+from collections import Counter
+
+def most_frequent_char(s):
+    count = Counter(s)
+    return count.most_common(1)[0][0]
+
+# Example Usage
+s = "mississippi"
+print(most_frequent_char(s))  # Output: "i"
+```
+
+### 6. **Convert a String to Title Case**
+```python
+def to_title_case(s):
+    return s.title()
+
+# Example Usage
+s = "hello world"
+print(to_title_case(s))  # Output: "Hello World"
+```
+
+### 7. **Find All Permutations of a String**
+```python
+from itertools import permutations
+
+def all_permutations(s):
+    return [''.join(p) for p in permutations(s)]
+
+# Example Usage
+s = "abc"
+print(all_permutations(s))  # Output: ['abc', 'acb', 'bac', 'bca', 'cab', 'cba']
+```
+
+### 8. **Check if a String Contains Only Digits**
+```python
+def contains_only_digits(s):
+    return s.isdigit()
+
+# Example Usage
+s = "12345"
+print(contains_only_digits(s))  # Output: True
+```
+
+### 9. **Find the Longest Palindromic Substring**
+```python
+def longest_palindromic_substring(s):
+    def expand_around_center(left, right):
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        return s[left + 1:right]
+    
+    longest = ""
+    for i in range(len(s)):
+        odd_palindrome = expand_around_center(i, i)
+        even_palindrome = expand_around_center(i, i + 1)
+        longest = max(longest, odd_palindrome, even_palindrome, key=len)
+    
+    return longest
+
+# Example Usage
+s = "babad"
+print(longest_palindromic_substring(s))  # Output: "bab" or "aba"
+```
+
+### 10. **Find the Length of the Longest Substring Without Repeating Characters**
+```python
+def length_of_longest_substring(s):
+    char_set = set()
+    left = 0
+    max_len = 0
+
+    for right in range(len(s)):
+        while s[right] in char_set:
+            char_set.remove(s[left])
+            left += 1
+        char_set.add(s[right])
+        max_len = max(max_len, right - left + 1)
+    
+    return max_len
+
+# Example Usage
+s = "abcabcbb"
+print(length_of_longest_substring(s))  # Output: 3
+```
+
+### 11. **Check if Two Strings are Rotations of Each Other**
+```python
+def are_rotations(s1, s2):
+    return len(s1) == len(s2) and s2 in s1 + s1
+
+# Example Usage
+s1 = "abcde"
+s2 = "cdeab"
+print(are_rotations(s1, s2))  # Output: True
+```
+
+### 12. **Remove All Occurrences of a Character in a String**
+```python
+def remove_char(s, char):
+    return s.replace(char, "")
+
+# Example Usage
+s = "hello"
+char = "l"
+print(remove_char(s, char))  # Output: "heo"
+```
+
+### 13. **Find the Length of the Last Word in a Sentence**
+```python
+def length_of_last_word(s):
+    return len(s.strip().split()[-1])
+
+# Example Usage
+s = "Hello World"
+print(length_of_last_word(s))  # Output: 5
+```
+
+### 14. **Check if a String is a Valid Parentheses Sequence**
+```python
+def is_valid_parentheses(s):
+    stack = []
+    mapping = {")": "(", "}": "{", "]": "["}
+    
+    for char in s:
+        if char in mapping:
+            top_element = stack.pop() if stack else '#'
+            if mapping[char] != top_element:
+                return False
+        else:
+            stack.append(char)
+    
+    return not stack
+
+# Example Usage
+s = "()[]{}"
+print(is_valid_parentheses(s))  # Output: True
+```
+
+### 15. **Remove All Non-Alphanumeric Characters from a String**
+```python
+import re
+
+def remove_non_alphanumeric(s):
+    return re.sub(r'\W+', '', s)
+
+# Example Usage
+s = "a@b#c$d!"
+print(remove_non_alphanumeric(s))  # Output: "abcd"
+```
+
 
 
 
