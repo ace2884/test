@@ -72,7 +72,271 @@ def oddeven(n,m):
 print(oddeven(4,20))
 ```
 
-Here are Python codes for each of the problems:
+Certainly! Here’s how you can tackle each of the specified tasks with Python code:
+
+### 1. Occurrence of Second Largest Element in an Array
+
+```python
+def second_largest_occurrence(arr):
+    if len(arr) < 2:
+        return 0
+
+    first, second = float('-inf'), float('-inf')
+    
+    for number in arr:
+        if number > first:
+            second = first
+            first = number
+        elif first > number > second:
+            second = number
+    
+    if second == float('-inf'):
+        return 0
+
+    return arr.count(second)
+
+# Example usage
+arr = [3, 5, 2, 1, 4, 5, 5, 2]
+print(second_largest_occurrence(arr))  # Output: 2
+```
+
+### 2. Longest Decline in Temperature
+
+```python
+def longest_decline(temperatures):
+    max_length = 0
+    current_length = 0
+    
+    for i in range(1, len(temperatures)):
+        if temperatures[i] < temperatures[i - 1]:
+            current_length += 1
+            max_length = max(max_length, current_length)
+        else:
+            current_length = 0
+
+    return max_length + 1 if max_length > 0 else 0
+
+# Example usage
+temperatures = [30, 25, 20, 18, 22, 15, 10, 9, 14]
+print(longest_decline(temperatures))  # Output: 3
+```
+
+### 3. Matching Words in Dictionary with Position
+
+```python
+def match_words_with_positions(words, dictionary):
+    return {word: idx for idx, word in enumerate(dictionary) if word in words}
+
+# Example usage
+words = ["apple", "banana"]
+dictionary = ["grape", "banana", "apple", "kiwi"]
+print(match_words_with_positions(words, dictionary))  # Output: {'apple': 2, 'banana': 1}
+```
+
+### 4. Even and Odd Check
+
+```python
+def even_odd_check(number):
+    if number % 2 == 0:
+        return "Even"
+    else:
+        return "Odd"
+
+# Example usage
+print(even_odd_check(7))  # Output: Odd
+print(even_odd_check(8))  # Output: Even
+```
+
+### 5. Most Repeated String
+
+```python
+def most_repeated_string(strings):
+    from collections import Counter
+    count = Counter(strings)
+    most_common = count.most_common(1)
+    return most_common[0][0] if most_common else None
+
+# Example usage
+strings = ["apple", "banana", "apple", "orange", "banana", "apple"]
+print(most_repeated_string(strings))  # Output: apple
+```
+
+### 6. Velocity Formula Implementation
+
+```python
+def velocity(distance, time):
+    if time == 0:
+        return "Time cannot be zero"
+    return distance / time
+
+# Example usage
+print(velocity(100, 20))  # Output: 5.0
+```
+
+### 7. Remove Vowels from String and Find Maximum Length and Permutations
+
+```python
+from math import factorial
+from collections import Counter
+
+def remove_vowels_and_permutations(s):
+    vowels = set('aeiouAEIOU')
+    filtered_string = ''.join(char for char in s if char not in vowels)
+    
+    if not filtered_string:
+        return 0, 0
+    
+    char_count = Counter(filtered_string)
+    n = sum(char_count.values())
+    denominator = 1
+    for count in char_count.values():
+        denominator *= factorial(count)
+    
+    permutations = factorial(n) // denominator
+    return len(filtered_string), permutations
+
+# Example usage
+s = "HelloWorld"
+print(remove_vowels_and_permutations(s))  # Output: (7, 5040)
+```
+
+### 8. Sum of Even Positions in an Array
+
+```python
+def sum_even_positions(arr):
+    return sum(arr[i] for i in range(0, len(arr), 2))
+
+# Example usage
+arr = [1, 2, 3, 4, 5]
+print(sum_even_positions(arr))  # Output: 9
+```
+
+### 9. Print Maximum Length of Substring
+
+```python
+def max_length_substring(s):
+    max_len = 0
+    current_len = 0
+    for i in range(len(s)):
+        if s[i] != s[i - 1] if i > 0 else True:
+            current_len += 1
+            max_len = max(max_len, current_len)
+        else:
+            current_len = 1
+    return max_len
+
+# Example usage
+s = "abcaab"
+print(max_length_substring(s))  # Output: 3
+```
+
+### 10. Height After N Bounces
+
+```python
+def height_after_bounces(initial_height, bounces):
+    height = initial_height
+    for _ in range(bounces):
+        height *= 0.5
+    return height
+
+# Example usage
+print(height_after_bounces(100, 3))  # Output: 12.5
+```
+
+### 11. Greatest File Version
+
+```python
+import re
+
+def greatest_file_version(versions):
+    def version_key(version):
+        return tuple(map(int, re.split(r'[._]', version)))
+    
+    return max(versions, key=version_key)
+
+# Example usage
+versions = ["1.2.3", "1.2.10", "1.10.1", "2.0.0"]
+print(greatest_file_version(versions))  # Output: 1.10.1
+```
+
+### 12. Difference Between XOR and Sum
+
+```python
+def xor_and_sum_difference(arr):
+    xor_result = 0
+    sum_result = 0
+    
+    for num in arr:
+        xor_result ^= num
+        sum_result += num
+    
+    return abs(xor_result - sum_result)
+
+# Example usage
+arr = [1, 2, 3, 4]
+print(xor_and_sum_difference(arr))  # Output: 2
+```
+
+### 13. KnapSack Problem
+
+```python
+def knapsack(weights, values, capacity):
+    n = len(weights)
+    dp = [[0 for _ in range(capacity + 1)] for _ in range(n + 1)]
+    
+    for i in range(n + 1):
+        for w in range(capacity + 1):
+            if i == 0 or w == 0:
+                dp[i][w] = 0
+            elif weights[i - 1] <= w:
+                dp[i][w] = max(values[i - 1] + dp[i - 1][w - weights[i - 1]], dp[i - 1][w])
+            else:
+                dp[i][w] = dp[i - 1][w]
+    
+    return dp[n][capacity]
+
+# Example usage
+weights = [1, 2, 3]
+values = [60, 100, 120]
+capacity = 5
+print(knapsack(weights, values, capacity))  # Output: 220
+```
+
+### 14. Wide Space Difference
+
+```python
+def wide_space_difference(s):
+    words = s.split()
+    max_length = max(len(word) for word in words) if words else 0
+    min_length = min(len(word) for word in words) if words else 0
+    return max_length - min_length
+
+# Example usage
+s = "This is an example sentence"
+print(wide_space_difference(s))  # Output: 5
+```
+
+### 15. Convert to Lower Case and Return the String
+
+```python
+def convert_to_lower_case(s):
+    return s.lower()
+
+# Example usage
+s = "HeLLo WoRLd"
+print(convert_to_lower_case(s))  # Output: hello world
+```
+
+### 16. Halloween Candles
+
+```python
+def halloween_candles(candles, new_candles):
+    return candles // 2 + new_candles // 2
+
+# Example usage
+print(halloween_candles(10, 5))  # Output: 7
+```
+
 
 ### 1. **Reverse a String**
 ```python
@@ -390,3 +654,5 @@ arr = [3, 2, 1, 5, 6, 4]
 k = 2
 print(find_kth_largest(arr, k))  # Output: 5
 ```
+
+
