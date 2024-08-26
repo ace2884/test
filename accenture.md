@@ -183,6 +183,74 @@ arr = [3, 5, 2, 1, 4, 5, 5, 2]
 print(second_largest_occurrence(arr))  # Output: 2
 ```
 
+You are given an array 'arr' of length 'n', consisting of integers.
+
+A subarray is a contiguous segment of an array. In other words, a subarray can be formed by removing 0 or more integers from the beginning and 0 or more integers from the end of an array.
+
+Find the sum of the subarray (including empty subarray) having maximum sum among all subarrays.
+
+The sum of an empty subarray is 0.
+
+Example :
+
+Input: 'arr' = [1, 2, 7, -4, 3, 2, -10, 9, 1]
+
+Output: 11
+
+Explanation: The subarray yielding the maximum sum is [1, 2, 7, -4, 3, 2].
+
+Input Format
+
+Integer input n and n inputs
+
+Constraints
+
+1 <= 'n' <= 10 ^ 6
+-10 ^ 6 <= 'arr[i]' <= 10 ^ 6
+Output Format
+
+Maximum sum
+
+Sample Input 0
+
+17
+65 -16 -85 3 99 -67 8 -43 92 36 73 -38 28 0 21 -36 -20 
+Sample Output 0
+
+212
+Sample Input 1
+
+6
+10 20 -30 40 -50 60
+Sample Output 1
+
+60
+Sample Input 2
+
+9
+1 2 7 -4 3 2 -10 9 1
+Sample Output 2
+
+11
+```
+def max_subarray_sum(arr):
+    max_ending_here = 0
+    max_so_far = 0
+    
+    for x in arr:
+        max_ending_here = max(x, max_ending_here + x)
+        max_so_far = max(max_so_far, max_ending_here)
+    
+    return max_so_far
+
+
+n = int(input().strip())
+arr = list(map(int, input().strip().split()))
+
+
+print(max_subarray_sum(arr))
+```
+
 ### 2. Longest Decline in Temperature
 
 ```python
