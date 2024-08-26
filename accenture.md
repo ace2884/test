@@ -1,5 +1,6 @@
 ## accenture codes
 
+
 ## Island Life
 ```python
 N,E,D = map(int,input().split())    #4 5 20
